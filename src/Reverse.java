@@ -7,7 +7,7 @@ public class Reverse {
 
     public static String reverseSrt(String str) {
         char[] charArray = str.toCharArray();
-       String result = "";
+        String result = "";
 
         for(int i = charArray.length-1; i >=0 ; --i ){
             if(Character.isUpperCase(charArray[i])){
