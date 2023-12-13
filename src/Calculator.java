@@ -14,6 +14,11 @@ public class Calculator {
         String[] parts = input.split(" ");
         List<String> resultS = new ArrayList<>();
         List<Double> resultD = new ArrayList<>();
+        String operator = parts[1];
+        List<String> operatorAll = new ArrayList<>();
+        operatorAll = List.of(new String[]{"+", "-", "/", "*", "%"});
+        //System.out.println("parts - "+ operator);
+
         for(int i = 0; i < parts.length; ++i) {
             String typePart = "String";
             try{
@@ -24,6 +29,10 @@ public class Calculator {
             catch (Exception e) {
                 System.out.println("Ошибка: " + parts[i] + " нельзя перевести в число!");
             }
+            if(operatorAll.contains(parts[i])){
+                typePart = "Operator";
+            }
+
             switch (typePart) {
                 case "String":
                     resultS.add("String");
@@ -33,13 +42,17 @@ public class Calculator {
                     resultS.add("Integer");
                     System.out.println("integer - " + typePart);
                     break;
+                case "Operator":
+                    //resultS.add("Integer");
+                    System.out.println("operator - " + typePart);
+                    break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + parts[i]);
             }
         }
         if (resultS.get(0) == resultS.get(1) && resultS.get(0) == "Integer") {
-            double resultDD = calculate(resultD.get(0), resultD.get(1), "+");
-            //System.out.println("Integer" + resultD.get(0) );
+            double resultDD = calculate(resultD.get(0), resultD.get(1), operator);
+            //System.out.println("resultDD это " + " " + resultD.get(0) + " " + resultD.get(1) + " " + operator);
             String fromLong = Long.toString((long) resultDD);
             List<String> dResultS = new ArrayList<>();
             dResultS.add(fromLong);
