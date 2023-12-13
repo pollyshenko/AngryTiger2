@@ -14,15 +14,23 @@ public class Calculator {
         String[] parts = input.split(" ");
         List<String> result = new ArrayList<>();
         for(int i = 0; i < parts.length; ++i) {
-            System.out.println(i + " "+ parts.length );
-            switch (i) {
-                case 0:
-                    result.add(" первое слово - " + parts[i]);
-                    System.out.println("case 0 - " + i);
+            String typePart = "String";
+            try{
+                long fromString = Long.parseLong(parts[i]);
+                typePart = "Integer";
+            }
+            catch (Exception e) {
+                System.out.println("Ошибка: " + parts[i] + " нельзя перевести в число!");
+            }
+            //System.out.println(i + " "+ parts.length );
+            switch (typePart) {
+                case "String":
+                    result.add(" строка - " + parts[i]);
+                    System.out.println("String - " + typePart);
                     break;
-                case 1:
-                    result.add(" второе слово - " + parts[i]);
-                    System.out.println("case 1 - " + i);
+                case "Integer":
+                    result.add(" числа - " + parts[i]);
+                    System.out.println("Integer - " + typePart);
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + parts[i]);
