@@ -9,9 +9,10 @@ public class Calculator {
         Scanner scan = new Scanner(System.in);
         System.out.println("Это калькулятор.\nОн должен получить строку в формате <первый аргумент> <операция> <второй аргумент> разделенными пробелом.\nВведите выражение: ");
         String mainString = scan.nextLine();
-        System.out.println("\nMain result "+calculate(mainString));
+
+        System.out.println("\nMain Calculate result: "+calculate(mainString));
     }
-    public static List<String> calculate(String input) {
+    public static String calculate(String input) {
         String[] parts = input.split(" ");
         List<String> resultS = new ArrayList<>();
         List<Double> resultD = new ArrayList<>();
@@ -36,7 +37,7 @@ public class Calculator {
                 typePart = "Integer";
             }
             catch (Exception e) {
-                System.out.println("<String> calculate| Ошибка: " + parts[i] + " нельзя перевести в число!");
+               // System.out.println("<String> calculate| Ошибка: " + parts[i] + " нельзя перевести в число!");
             }
             if(operatorAll.contains(parts[i])){
                 typePart = "Operator";
@@ -45,37 +46,40 @@ public class Calculator {
             switch (typePart) {
                 case "String":
                     resultS.add("String");
-                    System.out.println("<String> calculate| string - " + typePart);
+                   // System.out.println("<String> calculate| string - " + typePart);
                     break;
                 case "Integer":
                     resultS.add("Integer");
-                    System.out.println("<String> calculate| integer - " + typePart);
+                   // System.out.println("<String> calculate| integer - " + typePart);
                     break;
                 case "Operator":
                     resultS.add("Operator");
-                    System.out.println("<String> calculate| operator - " + typePart);
+                    //System.out.println("<String> calculate| operator - " + typePart);
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + parts[i]);
             }
         }
-        System.out.println("<String> calculate| resultS[0,2] --- " + " " + resultS.get(0) + " " + resultS.get(2) + " " + operator);
+        //System.out.println("<String> calculate| resultS[0,2] --- " + " " + resultS.get(0) + " " + resultS.get(2) + " " + operator);
         if (resultS.get(0) == resultS.get(2) && resultS.get(0) == "Integer") {
             double resultDCalculate = calculate(resultD.get(0), resultD.get(1), operator);
             String fromLong = Long.toString((long) resultDCalculate);
-            List<String> dResultS = new ArrayList<>();
-            dResultS.add(fromLong);
-            return dResultS;
+            //List<String> dResultS = new ArrayList<>();
+           // dResultS.add(fromLong);
+            return fromLong;
         }
         else {
             if (resultS.get(0) == resultS.get(2) && resultS.get(0) == "String") {
                 System.out.println("<String> calculate| "+resultD + " - resultD");
                 String resultSCalculate = calculate(parts[0], parts[2],operator);
-                List<String> SResultS = new ArrayList<>();
-                SResultS.add(resultSCalculate);
-                return SResultS;
+               // List<String> SResultS = new ArrayList<>();
+               // SResultS.add(resultSCalculate);
+                return resultSCalculate;
             }
-            else return resultS;
+            else {
+                //return resultS;
+                throw new IllegalStateException("<String> calculate| Unexpected value: " );
+            }
         }
     }
    private static double calculate(double a, double b, String operation) {
@@ -113,26 +117,14 @@ public class Calculator {
 
     private static String calculate(String a, String b, String operation) {
         String resultString = "";
-        /*switch(operation){
-            case "+":
-                resultString = a.concat(b);
-                break;
-            case "-":
-                //resultString = a - b;
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + operation);
-        }
-
-         */
 
         if(operation.contains("+")){
-            System.out.println("String calculate| if '+'");
+           // System.out.println("String calculate| if '+'");
             resultString = a.concat(b);
         }
         else {
             if(operation.contains("-")){
-                System.out.println("String calculate| if '-'");
+                //System.out.println("String calculate| if '-'");
                 StringBuilder postfix = new StringBuilder();
                 for(int i = 0; i<a.length(); ++i){
                     char indChar = a.charAt(i);
@@ -146,19 +138,18 @@ public class Calculator {
 
             }
             else {
-                System.out.println("String calculate| else");
-                //throw new IllegalStateException("String calculate| Unexpected value: " + operation);
+               // System.out.println("String calculate| else");
+                throw new IllegalStateException("String calculate| Unexpected value: " + operation);
             }
         }
 
         return resultString;
-        //TODO напишите метод для складывания, либо вычитания строк
-        //Важно: для вычитания строки, они должны совпадать по регистру
     }
 /*
     public static int getNumbers(int a, int b) {
         //TODO напишите метод принимает два аргумента, складывает их и возращает кол-во четных цифр в сумме
     }
+
 
     public static String getMinimalType(String input) {
         //TODO напишите метод получается число в формате строки и возращает минимальный целочисленный тип, к которому его можно привести, Long, Int, Short или Byte
