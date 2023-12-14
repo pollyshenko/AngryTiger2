@@ -1,12 +1,13 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class Calculator {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
+
+        System.out.println("\nЭто 3-ий калькулятор.\n Он принимает число и возвращает минимальный целочисленный тип, к которому его можно привести..\nВведите число:");
+        String mainString3 = scan.nextLine();
+        System.out.println("\nThirds Calculate result: " + getMinimalType(mainString3));
 
         System.out.println("\nЭто 2-ой калькулятор.\n Он возвращает кол-во чётных цифр в их сумме.\nВведите 2 числа разделенными пробелом:");
         String mainString2 = scan.nextLine();
@@ -174,13 +175,48 @@ public class Calculator {
         return resultGetNumbers;
     }
 
-/*
+
 
     public static String getMinimalType(String input) {
+        String resultGetMinimalType = "default";
+         try{
+             byte try1 = Byte.parseByte(input);
+             resultGetMinimalType = "Byte";
+             return resultGetMinimalType;
+         }
+         catch (Exception e) {
+
+         }
+        try{
+            short try3 = Short.parseShort(input);
+            resultGetMinimalType = "Shot";
+            return resultGetMinimalType;
+        }
+        catch (Exception e){
+
+        }
+        try{
+            int try2 = Integer.parseInt(input);
+            resultGetMinimalType = "Int";
+            return resultGetMinimalType;
+        }
+        catch (Exception e){
+
+        }
+        try{
+            long try4 = Long.parseLong(input);
+            resultGetMinimalType = "Long";
+            return resultGetMinimalType;
+        }
+        catch (Exception e){
+
+        }
+
+
         //TODO напишите метод получается число в формате строки и возращает минимальный целочисленный тип, к которому его можно привести, Long, Int, Short или Byte
+        return resultGetMinimalType;
     }
 
- */
 
 
 }
