@@ -195,20 +195,13 @@ public class Calculator {
         while (number > 0){
             int lastNumber = number % 10;
            // System.out.println("get Numbers| number>0: " + number + " lastNumber: " + lastNumber);
-            if(lastNumber % 2 == 0 && lastNumber != 0){
+            if(lastNumber % 2 == 0){
                 resultGetNumbers += 1;
                // System.out.println("get Numbers| resultGetNumbers+1: " + resultGetNumbers);
             }
             number = number / 10;
         }
-        /*if(resultGetNumbers == 0){
-            throw new IllegalArgumentException("getNumbers| Unexpected value: " + a + b);
-        }
 
-         */
-        if(a == -114 && b == -937){
-            resultGetNumbers = 0;
-        }
         return resultGetNumbers;
     }
 
