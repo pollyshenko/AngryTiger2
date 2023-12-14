@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class Calculator {
@@ -145,7 +146,7 @@ public class Calculator {
         }
         else {
             if(operation.contains("-")){
-                //System.out.println("String calculate| if '-'");
+                System.out.println("String calculate| if '-'");
                 StringBuilder postfix = new StringBuilder();
                 for(int i = 0; i<a.length(); ++i){
                     char indChar = a.charAt(i);
@@ -155,11 +156,28 @@ public class Calculator {
                     else postfix.append(indChar);
                 }
                 b += postfix;
+                System.out.println("String calculate| b first: " + b);
+
+
+                String[] Lowerb2 = b.toLowerCase().split("");
+                System.out.println("String calculate| Lowerb2 first: " + Lowerb2 );
+                Set set = new HashSet();
+                //String resultLower = "" ;
+                for (int i = 0; i < Lowerb2.length; i++) {
+                    set.add(Lowerb2[i]);
+                }
+                String str1 = String.join("",set);
+
+
+                System.out.println("String calculate| set first: " + set );
+                System.out.println("String calculate|  " + str1 +" = " + b.toLowerCase());
+
+                if(str1.length() == b.toLowerCase().length()){
                 resultString = b;
-
-
-
+                }
+                else  throw new IllegalArgumentException("String calculate| Разные значения");
             }
+
             else {
                // System.out.println("String calculate| else");
                 throw new IllegalArgumentException("String calculate| Unexpected value: " + operation);
