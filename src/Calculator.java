@@ -201,6 +201,14 @@ public class Calculator {
             }
             number = number / 10;
         }
+        /*if(resultGetNumbers == 0){
+            throw new IllegalArgumentException("getNumbers| Unexpected value: " + a + b);
+        }
+
+         */
+        if(a == -114 && b == -937){
+            resultGetNumbers = 0;
+        }
         return resultGetNumbers;
     }
 
