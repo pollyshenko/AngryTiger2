@@ -52,7 +52,7 @@ public class Calculator {
         }
         if (resultS.get(0) == resultS.get(1) && resultS.get(0) == "Integer") {
             double resultDD = calculate(resultD.get(0), resultD.get(1), operator);
-            //System.out.println("resultDD это " + " " + resultD.get(0) + " " + resultD.get(1) + " " + operator);
+            System.out.println("resultDD это " + " " + resultD.get(0) + " " + resultD.get(1) + " " + operator);
             String fromLong = Long.toString((long) resultDD);
             List<String> dResultS = new ArrayList<>();
             dResultS.add(fromLong);
@@ -67,7 +67,35 @@ public class Calculator {
         //разделенными пробелом и отправлять в нужные методы
     }
    private static double calculate(double a, double b, String operation) {
-        double resultDouble = 666;
+        double arg1 = a;
+        double arg2 = b;
+        double resultDouble = 0;
+        switch (operation) {
+                case "+":
+                    resultDouble = arg1 + arg2;
+                    break;
+                case "-":
+                    resultDouble = arg1 - arg2;
+                    break;
+                case "/":
+                    if(arg1 == 0 || arg2 == 0) {
+                        throw new IllegalStateException("Unexpected value: ");
+                        //System.out.println("Ошибка1 :нельзя перевести в число!");
+                    }
+                    else {
+                        resultDouble = arg1 / arg2;
+                        break;
+                    }
+                case "*":
+                    resultDouble = arg1 * arg2;
+                    break;
+                case "%":
+                    resultDouble = arg1 % arg2;
+                    break;
+
+            }
+
+
         return resultDouble;
         //TODO напишите метод для работы с числами со следующими операциями: +, -, /, *, %
     }
