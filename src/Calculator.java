@@ -17,6 +17,14 @@ public class Calculator {
         String operator = parts[1];
         List<String> operatorAll = new ArrayList<>();
         operatorAll = List.of(new String[]{"+", "-", "/", "*", "%"});
+
+        //System.out.println("parts - "+ parts.length);
+        //if (!(parts.length == 3)){
+           // throw new IllegalStateException("Unexpected value: "+ parts.length);
+        //}
+        if(!operatorAll.contains(parts[1])){
+            throw new IllegalStateException("Unexpected value: " + parts[1]);
+        }
         //System.out.println("parts - "+ operator);
 
         for(int i = 0; i < parts.length; ++i) {
@@ -43,7 +51,7 @@ public class Calculator {
                     System.out.println("integer - " + typePart);
                     break;
                 case "Operator":
-                    //resultS.add("Integer");
+                    resultS.add("Integer");
                     System.out.println("operator - " + typePart);
                     break;
                 default:
@@ -62,36 +70,33 @@ public class Calculator {
           System.out.println(resultD + " - resultD");
           return resultS;
         }
-
-        //TODO напишите метод Calculate, который будет получать строку в формате <первый аргумент> <операция> <второй аргумент>
-        //разделенными пробелом и отправлять в нужные методы
     }
    private static double calculate(double a, double b, String operation) {
-        double arg1 = a;
-        double arg2 = b;
         double resultDouble = 0;
         switch (operation) {
                 case "+":
-                    resultDouble = arg1 + arg2;
+                    resultDouble = a + b;
                     break;
                 case "-":
-                    resultDouble = arg1 - arg2;
+                    resultDouble = a - b;
                     break;
                 case "/":
-                    if(arg1 == 0 || arg2 == 0) {
+                    if(a == 0 || b == 0) {
                         throw new IllegalStateException("Unexpected value: ");
                         //System.out.println("Ошибка1 :нельзя перевести в число!");
                     }
                     else {
-                        resultDouble = arg1 / arg2;
+                        resultDouble = a / b;
                         break;
                     }
                 case "*":
-                    resultDouble = arg1 * arg2;
+                    resultDouble = a * b;
                     break;
                 case "%":
-                    resultDouble = arg1 % arg2;
+                    resultDouble = a % b;
                     break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + operation);
 
             }
 
