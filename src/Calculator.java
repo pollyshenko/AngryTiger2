@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Calculator {
@@ -8,7 +9,7 @@ public class Calculator {
         Scanner scan = new Scanner(System.in);
         System.out.println("Это калькулятор.\nОн должен получить строку в формате <первый аргумент> <операция> <второй аргумент> разделенными пробелом.\nВведите выражение: ");
         String mainString = scan.nextLine();
-        System.out.println("resultSS "+calculate(mainString));
+        System.out.println("\nMain result "+calculate(mainString));
     }
     public static List<String> calculate(String input) {
         String[] parts = input.split(" ");
@@ -35,7 +36,7 @@ public class Calculator {
                 typePart = "Integer";
             }
             catch (Exception e) {
-                System.out.println("Ошибка: " + parts[i] + " нельзя перевести в число!");
+                System.out.println("<String> calculate| Ошибка: " + parts[i] + " нельзя перевести в число!");
             }
             if(operatorAll.contains(parts[i])){
                 typePart = "Operator";
@@ -44,31 +45,37 @@ public class Calculator {
             switch (typePart) {
                 case "String":
                     resultS.add("String");
-                    System.out.println("string - " + typePart);
+                    System.out.println("<String> calculate| string - " + typePart);
                     break;
                 case "Integer":
                     resultS.add("Integer");
-                    System.out.println("integer - " + typePart);
+                    System.out.println("<String> calculate| integer - " + typePart);
                     break;
                 case "Operator":
-                    resultS.add("Integer");
-                    System.out.println("operator - " + typePart);
+                    resultS.add("Operator");
+                    System.out.println("<String> calculate| operator - " + typePart);
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + parts[i]);
             }
         }
-        if (resultS.get(0) == resultS.get(1) && resultS.get(0) == "Integer") {
-            double resultDD = calculate(resultD.get(0), resultD.get(1), operator);
-            System.out.println("resultDD это " + " " + resultD.get(0) + " " + resultD.get(1) + " " + operator);
-            String fromLong = Long.toString((long) resultDD);
+        System.out.println("<String> calculate| resultS[0,2] --- " + " " + resultS.get(0) + " " + resultS.get(2) + " " + operator);
+        if (resultS.get(0) == resultS.get(2) && resultS.get(0) == "Integer") {
+            double resultDCalculate = calculate(resultD.get(0), resultD.get(1), operator);
+            String fromLong = Long.toString((long) resultDCalculate);
             List<String> dResultS = new ArrayList<>();
             dResultS.add(fromLong);
             return dResultS;
         }
         else {
-          System.out.println(resultD + " - resultD");
-          return resultS;
+            if (resultS.get(0) == resultS.get(2) && resultS.get(0) == "String") {
+                System.out.println("<String> calculate| "+resultD + " - resultD");
+                String resultSCalculate = calculate(parts[0], parts[2],operator);
+                List<String> SResultS = new ArrayList<>();
+                SResultS.add(resultSCalculate);
+                return SResultS;
+            }
+            else return resultS;
         }
     }
    private static double calculate(double a, double b, String operation) {
@@ -82,7 +89,7 @@ public class Calculator {
                     break;
                 case "/":
                     if(a == 0 || b == 0) {
-                        throw new IllegalStateException("Unexpected value: ");
+                        throw new IllegalStateException("double calculate| Unexpected value: ");
                         //System.out.println("Ошибка1 :нельзя перевести в число!");
                     }
                     else {
@@ -96,20 +103,59 @@ public class Calculator {
                     resultDouble = a % b;
                     break;
             default:
-                throw new IllegalStateException("Unexpected value: " + operation);
+                throw new IllegalStateException("double calculate| Unexpected value: " + operation);
 
             }
 
 
         return resultDouble;
-        //TODO напишите метод для работы с числами со следующими операциями: +, -, /, *, %
     }
-/*
+
     private static String calculate(String a, String b, String operation) {
+        String resultString = "";
+        /*switch(operation){
+            case "+":
+                resultString = a.concat(b);
+                break;
+            case "-":
+                //resultString = a - b;
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + operation);
+        }
+
+         */
+
+        if(operation.contains("+")){
+            System.out.println("String calculate| if '+'");
+            resultString = a.concat(b);
+        }
+        else {
+            if(operation.contains("-")){
+                System.out.println("String calculate| if '-'");
+                StringBuilder postfix = new StringBuilder();
+                for(int i = 0; i<a.length(); ++i){
+                    char indChar = a.charAt(i);
+                    if(b.indexOf(indChar) != -1){
+                        b = b.replaceFirst(""+indChar,"");
+                    }
+                    else postfix.append(indChar);
+                }
+                b += postfix;
+                resultString = b;
+
+            }
+            else {
+                System.out.println("String calculate| else");
+                //throw new IllegalStateException("String calculate| Unexpected value: " + operation);
+            }
+        }
+
+        return resultString;
         //TODO напишите метод для складывания, либо вычитания строк
         //Важно: для вычитания строки, они должны совпадать по регистру
     }
-
+/*
     public static int getNumbers(int a, int b) {
         //TODO напишите метод принимает два аргумента, складывает их и возращает кол-во четных цифр в сумме
     }
