@@ -5,9 +5,9 @@ public class Calculator {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
-        System.out.println("\nЭто 3-ий калькулятор.\n Он принимает число и возвращает минимальный целочисленный тип, к которому его можно привести..\nВведите число:");
-        String mainString3 = scan.nextLine();
-        System.out.println("\nThirds Calculate result: " + getMinimalType(mainString3));
+        System.out.println("Это калькулятор.\nОн должен получить строку в формате <первый аргумент> <операция> <второй аргумент> разделенными пробелом.\nВведите выражение: ");
+        String mainString1 = scan.nextLine();
+        System.out.println("\nFirst Calculate result: "+calculate(mainString1));
 
         System.out.println("\nЭто 2-ой калькулятор.\n Он возвращает кол-во чётных цифр в их сумме.\nВведите 2 числа разделенными пробелом:");
         String mainString2 = scan.nextLine();
@@ -16,11 +16,11 @@ public class Calculator {
         int secondNum = Integer.parseInt (partsInt[1]);
         System.out.println("\nSecond Calculate result: "+ getNumbers(firstNum,secondNum));
 
-        // String[] parts = mainString.split(" ");
 
-        System.out.println("Это калькулятор.\nОн должен получить строку в формате <первый аргумент> <операция> <второй аргумент> разделенными пробелом.\nВведите выражение: ");
-        String mainString1 = scan.nextLine();
-        System.out.println("\nFirst Calculate result: "+calculate(mainString1));
+
+        System.out.println("\nЭто 3-ий калькулятор.\n Он принимает число и возвращает минимальный целочисленный тип, к которому его можно привести..\nВведите число:");
+        String mainString3 = scan.nextLine();
+        System.out.println("\nThirds Calculate result: " + getMinimalType(mainString3));
 
 
     }
@@ -37,14 +37,14 @@ public class Calculator {
            // throw new IllegalStateException("Unexpected value: "+ parts.length);
         //}
         if(!operatorAll.contains(parts[1])){
-            throw new IllegalStateException("Unexpected value: " + parts[1]);
+            throw new IllegalArgumentException("Unexpected value: " + parts[1]);
         }
         //System.out.println("parts - "+ operator);
 
         for(int i = 0; i < parts.length; ++i) {
             String typePart = "String";
             try{
-                double fromString = Long.parseLong(parts[i]);
+                double fromString = Double.parseDouble(parts[i]);
                 resultD.add(fromString);
                 typePart = "Integer";
             }
@@ -69,20 +69,23 @@ public class Calculator {
                     //System.out.println("<String> calculate| operator - " + typePart);
                     break;
                 default:
-                    throw new IllegalStateException("Unexpected value: " + parts[i]);
+                    throw new IllegalArgumentException("Unexpected value: " + parts[i]);
             }
         }
         //System.out.println("<String> calculate| resultS[0,2] --- " + " " + resultS.get(0) + " " + resultS.get(2) + " " + operator);
         if (resultS.get(0) == resultS.get(2) && resultS.get(0) == "Integer") {
             double resultDCalculate = calculate(resultD.get(0), resultD.get(1), operator);
-            String fromLong = Long.toString((long) resultDCalculate);
+            //System.out.println("<String> calculate| resultDCalculate " + resultDCalculate);
+            String fromLong = Double.toString(resultDCalculate);
+                 //   Long.toString((long) resultDCalculate);
             //List<String> dResultS = new ArrayList<>();
            // dResultS.add(fromLong);
             return fromLong;
+
         }
         else {
             if (resultS.get(0) == resultS.get(2) && resultS.get(0) == "String") {
-                System.out.println("<String> calculate| "+resultD + " - resultD");
+               // System.out.println("<String> calculate| "+resultD + " - resultD");
                 String resultSCalculate = calculate(parts[0], parts[2],operator);
                // List<String> SResultS = new ArrayList<>();
                // SResultS.add(resultSCalculate);
@@ -90,7 +93,7 @@ public class Calculator {
             }
             else {
                 //return resultS;
-                throw new IllegalStateException("<String> calculate| Unexpected value: " );
+                throw new IllegalArgumentException("<String> calculate| Unexpected value: " );
             }
         }
     }
@@ -105,7 +108,7 @@ public class Calculator {
                     break;
                 case "/":
                     if(a == 0 || b == 0) {
-                        throw new IllegalStateException("double calculate| Unexpected value: ");
+                        throw new IllegalArgumentException("double calculate| Unexpected value: ");
                         //System.out.println("Ошибка1 :нельзя перевести в число!");
                     }
                     else {
@@ -116,10 +119,16 @@ public class Calculator {
                     resultDouble = a * b;
                     break;
                 case "%":
-                    resultDouble = a % b;
-                    break;
+                    if(a == 0 || b == 0) {
+                        throw new IllegalArgumentException("double calculate| Unexpected value: ");
+                        //System.out.println("Ошибка1 :нельзя перевести в число!");
+                    }
+                    else {
+                        resultDouble = a % b;
+                        break;
+                    }
             default:
-                throw new IllegalStateException("double calculate| Unexpected value: " + operation);
+                throw new IllegalArgumentException("double calculate| Unexpected value: " + operation);
 
             }
 
@@ -148,10 +157,12 @@ public class Calculator {
                 b += postfix;
                 resultString = b;
 
+
+
             }
             else {
                // System.out.println("String calculate| else");
-                throw new IllegalStateException("String calculate| Unexpected value: " + operation);
+                throw new IllegalArgumentException("String calculate| Unexpected value: " + operation);
             }
         }
 
@@ -165,10 +176,10 @@ public class Calculator {
 
         while (number > 0){
             int lastNumber = number % 10;
-            System.out.println("get Numbers| number>0: " + number + " lastNumber: " + lastNumber);
+           // System.out.println("get Numbers| number>0: " + number + " lastNumber: " + lastNumber);
             if(lastNumber % 2 == 0 && lastNumber != 0){
                 resultGetNumbers += 1;
-                System.out.println("get Numbers| resultGetNumbers+1: " + resultGetNumbers);
+               // System.out.println("get Numbers| resultGetNumbers+1: " + resultGetNumbers);
             }
             number = number / 10;
         }
@@ -185,11 +196,11 @@ public class Calculator {
              return resultGetMinimalType;
          }
          catch (Exception e) {
-
+             //throw new IllegalArgumentException("Unexpected value: ");
          }
         try{
             short try3 = Short.parseShort(input);
-            resultGetMinimalType = "Shot";
+            resultGetMinimalType = "Short";
             return resultGetMinimalType;
         }
         catch (Exception e){
@@ -211,12 +222,9 @@ public class Calculator {
         catch (Exception e){
 
         }
-
-
-        //TODO напишите метод получается число в формате строки и возращает минимальный целочисленный тип, к которому его можно привести, Long, Int, Short или Byte
         return resultGetMinimalType;
     }
-
+    //expected: <java.lang.IllegalArgumentException> but was: <java.lang.IllegalStateException>
 
 
 }
