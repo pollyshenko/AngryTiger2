@@ -7,10 +7,21 @@ public class Calculator {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        System.out.println("Это калькулятор.\nОн должен получить строку в формате <первый аргумент> <операция> <второй аргумент> разделенными пробелом.\nВведите выражение: ");
-        String mainString = scan.nextLine();
 
-        System.out.println("\nMain Calculate result: "+calculate(mainString));
+        System.out.println("\nЭто 2-ой калькулятор.\n Он возвращает кол-во чётных цифр в их сумме.\nВведите 2 числа разделенными пробелом:");
+        String mainString2 = scan.nextLine();
+        String[] partsInt = mainString2.split(" ");
+        int firstNum = Integer.parseInt (partsInt[0]);
+        int secondNum = Integer.parseInt (partsInt[1]);
+        System.out.println("\nSecond Calculate result: "+ getNumbers(firstNum,secondNum));
+
+        // String[] parts = mainString.split(" ");
+
+        System.out.println("Это калькулятор.\nОн должен получить строку в формате <первый аргумент> <операция> <второй аргумент> разделенными пробелом.\nВведите выражение: ");
+        String mainString1 = scan.nextLine();
+        System.out.println("\nFirst Calculate result: "+calculate(mainString1));
+
+
     }
     public static String calculate(String input) {
         String[] parts = input.split(" ");
@@ -145,11 +156,25 @@ public class Calculator {
 
         return resultString;
     }
-/*
+
     public static int getNumbers(int a, int b) {
-        //TODO напишите метод принимает два аргумента, складывает их и возращает кол-во четных цифр в сумме
+        int summa = a + b;
+        int resultGetNumbers = 0;
+        int number = Math.abs(summa);
+
+        while (number > 0){
+            int lastNumber = number % 10;
+            System.out.println("get Numbers| number>0: " + number + " lastNumber: " + lastNumber);
+            if(lastNumber % 2 == 0 && lastNumber != 0){
+                resultGetNumbers += 1;
+                System.out.println("get Numbers| resultGetNumbers+1: " + resultGetNumbers);
+            }
+            number = number / 10;
+        }
+        return resultGetNumbers;
     }
 
+/*
 
     public static String getMinimalType(String input) {
         //TODO напишите метод получается число в формате строки и возращает минимальный целочисленный тип, к которому его можно привести, Long, Int, Short или Byte
