@@ -17,26 +17,41 @@ public class MyArrays {
     public static char[][] getTwoDimensionalArray(int size) {
 
         char[][] MyChar = new char[size][size];
-        String [][]MyString = new String[size][size];
+        String[][] MyString = new String[size][size];
         String stroka = "";
-        StringBuilder[][] MyBilder= new StringBuilder[size][size];
-
+        String[][] MyBilder= new StringBuilder[size][size];
+        MyBilder = new String[][]{{"1", "1"}{}};
         int[][] Myint = new int[size][size];
+
         for(int i= 0 ; i < size; i++){
+            for(int j = 0; j<size; j++){
+                if(i == j || i+j == size-1) {
+                    MyBilder.
+                }
+            }
+
+        }
+       /* for(int i= 0 ; i < size; i++){
             for(int j = 0; j<size; j++){
                 if(i == j || i+j == size-1){
                     Myint[i][j]= 1;
                 }
                 else Myint[i][j]= 0;
             }
-            char[] chars = stroka.toCharArray();
+
 
         }
 
-        System.out.println(Arrays.deepToString(Myint));
+        */
+
+        //System.out.println(Arrays.deepToString(Myint));
+        MyBilder = Arrays.copyOf(Myint,Myint.length);
+       // System.out.println(Arrays.deepToString(MyChar));
 
 
-        for(int[] row: Myint)
+
+
+        /*for(int[] row: Myint)
         {
             for(int element: row) {
                 System.out.print(element);
@@ -46,7 +61,10 @@ public class MyArrays {
                 }
             }
         }
-            
+
+         */
+
+
 
         //System.out.println(MyString);
 
