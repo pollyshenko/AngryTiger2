@@ -9,81 +9,59 @@ public class MyArrays {
 
 
 
-        char [][] NewChar = getTwoDimensionalArray(number);
-        getStringArray(NewChar);
+        //char [][] NewChar = getTwoDimensionalArray(number);
+
+        System.out.println(getStringArray(getTwoDimensionalArray(number)));
 
     }
 
     public static char[][] getTwoDimensionalArray(int size) {
 
         char[][] MyChar = new char[size][size];
-        String[][] MyString = new String[size][size];
-        String stroka = "";
-        String[][] MyBilder= new StringBuilder[size][size];
-        MyBilder = new String[][]{{"1", "1"}{}};
-        int[][] Myint = new int[size][size];
 
         for(int i= 0 ; i < size; i++){
             for(int j = 0; j<size; j++){
-                if(i == j || i+j == size-1) {
-                    MyBilder.
-                }
-            }
-
-        }
-       /* for(int i= 0 ; i < size; i++){
-            for(int j = 0; j<size; j++){
                 if(i == j || i+j == size-1){
-                    Myint[i][j]= 1;
+                    MyChar[i][j]= 'X';
                 }
-                else Myint[i][j]= 0;
+                else MyChar[i][j]= '0';
             }
 
 
         }
 
-        */
-
-        //System.out.println(Arrays.deepToString(Myint));
-        MyBilder = Arrays.copyOf(Myint,Myint.length);
-       // System.out.println(Arrays.deepToString(MyChar));
 
 
 
-
-        /*for(int[] row: Myint)
-        {
-            for(int element: row) {
-                System.out.print(element);
-                if (element == 1){
-
-
-                }
-            }
-        }
-
-         */
-
-
-
-        //System.out.println(MyString);
-
-
-        //String MyChar = MyString.toString();
         //TODO сгенерировать двумерный массив размера size
-        return new char[0][0];
+        return MyChar;
     }
     public static String getStringArray(char[][] charArray){
-       /* for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix.length; j++) {
-                System.out.print(matrix[i][j]);
+        StringBuilder sb = new StringBuilder();
+       // char[][] my2Char = {{'1','2','3'},{'4','5','6'},{'7','8','9'}};
+        char[][] my2Char = charArray;
+       for (int i = 0; i < my2Char.length; i++) {
+            for (int j = 0; j < my2Char.length; j++) {
+                if(j != my2Char.length-1) {
+                    //System.out.println("j=" + j + " - " + my2Char[i][j]);
+                    sb.append(my2Char[i][j]);
+                    //sb.append("\n");
+                }
+                else{
+                    //System.out.println("2j=" + j + " - " + my2Char[i][j]);
+                    sb.append(my2Char[i][j] + "\n");
+                }
             }
-            System.out.print("\n");
-        }
 
-        */
+        }
+        String myString = sb.toString();
+       // System.out.println("my2Char.length= " + my2Char.length);
+       // System.out.println("myString= "+ myString);
+       // System.out.println("my2Char= "+ Arrays.deepToString(my2Char));
+
+
         //TODO вывести двумерный массив в формате строки с переносом строк
-        return "";
+        return myString;
     }
 
 
