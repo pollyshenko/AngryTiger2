@@ -1,7 +1,5 @@
 import java.util.Arrays;
 import java.util.Scanner;
-
-
 public class MyArrays {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
@@ -37,6 +35,7 @@ public class MyArrays {
 
         }
         String myString = sb.toString();
+        System.out.println("A" + ('\t' + '\u0003'));
         //TODO вывести двумерный массив в формате строки с переносом строк
         return myString;
     }
