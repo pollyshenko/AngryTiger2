@@ -1,17 +1,11 @@
-public class Hospital {
-    public static void main(String[] args) {
-        //TODO напишите консольное приложение для работы с классом больница, учитывая, что сгенерированные и вычисленные переменные,
-        // нельзя будет менять.
-        System.out.printf("");;
-    }
-}
+package Hospital;
 
 public class Hospital {
     public Hospital(int patientsCount) {
         //TODO создание больницы с указанным кол-вом пациентов
         // если значение не верное, бросать IllegalArgumentException с помощью метода throw new <Exception.class>
     }
-
+/*
     //нужно кол-во пациентов
     public float[] generatePatientsTemperatures() {
         //TODO реализовать генерацию массива температур от 32 до 40 градусов
@@ -51,6 +45,8 @@ public class Hospital {
            Средняя температура: 35,67
            Количество здоровых: 1
          */
+    /*
         return "";
     }
+    */
 }
