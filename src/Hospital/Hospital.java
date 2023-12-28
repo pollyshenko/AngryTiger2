@@ -8,12 +8,14 @@ import java.util.Random;
 
 public class Hospital {
     int patientsCount;
-    //float[] patientsTemperatures;
+//    int countHealthy;
+    float[] patientsTemperatures;
     public Hospital(int patientsCount) {
         if (patientsCount <= 0)
             throw new IllegalArgumentException("Число должно быть положительным");
         this.patientsCount = patientsCount;
-       // this.patientsTemperatures = generatePatientsTemperatures();
+        this.patientsTemperatures = generatePatientsTemperatures();
+       // this.countHealthy = getCountHealthy();
 
         //Это конструктор
         //TODO создание больницы с указанным кол-вом пациентов
@@ -21,8 +23,8 @@ public class Hospital {
     }
 
     //нужно кол-во пациентов
-    public float[] generatePatientsTemperatures(int patientsCount) {
-
+    public float[] generatePatientsTemperatures() {
+        System.out.println("generatePatientsTemperatures");
         //Класс Random. Метод random()
         //DecimalFormat decimalFormat = new DecimalFormat( "#.#" ); - на выходе строка, что не подходит
         //double scale = Math.pow(10, 1); - не очень корректно округляет в итоге
@@ -52,8 +54,7 @@ public class Hospital {
     }
 
     //нужна генерация температур
-    public int getCountHealthy( float [] patientsTemperatures) {
-
+    public int getCountHealthy() {
         int countHealthy = 0;
         for(float i:patientsTemperatures){
             if(i < 36.9 && i > 36.2){
