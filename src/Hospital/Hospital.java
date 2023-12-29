@@ -13,6 +13,9 @@ public class Hospital {
     boolean isCount;
     float[] patientsTemperatures;
     String temperaturesToString;
+    double averageTemp;
+    boolean isAverage;
+    MathContext context = new MathContext(3, RoundingMode.HALF_UP);
 
     public Hospital(int patientsCount) {
         if (patientsCount <= 0)
@@ -34,7 +37,6 @@ public class Hospital {
         //double scale = Math.pow(10, 1); - не очень корректно округляет в итоге
         //  patientsTemperatures[i] = (float) (Math.ceil(number * scale) / scale);
 
-        MathContext context = new MathContext(3, RoundingMode.HALF_UP);
         Random rand = new Random();
         int a = 32;
         int b = 40;
@@ -42,7 +44,7 @@ public class Hospital {
         //float[] Temperatures = new float[patientsCount];
         for (int i = 0; i < patientsCount; i++) {
             float number = a + rand.nextFloat(b - a);
-            System.out.println(number);
+            //System.out.println(number);
             BigDecimal result = new BigDecimal(number, context);
             patientsTemperatures[i] = result.floatValue();
         }
@@ -55,6 +57,7 @@ public class Hospital {
         int x= a + (int)(Math.random() * ((b - a) + 1));
         System.out.println("Случайное число x: " + x);
          */
+        System.out.println(Arrays.toString(patientsTemperatures));
         return patientsTemperatures;
     }
 
@@ -130,14 +133,42 @@ public class Hospital {
         // если генерация температур не была выполнена, вызвать метод генерации
     }
     //Нужна генерация температур
-    /*
+
 
     public double getAverageTemp() {
+    if(isAverage){
+        return averageTemp;
+    }
+        else {
+            isAverage = true;
+        if (patientsTemperatures != null) {
+            System.out.println("getAverageTemp| patientsTemperatures != null");
+            for (float patientsTemperature : patientsTemperatures) {
+                averageTemp += patientsTemperature;
+            }
+            averageTemp = averageTemp/patientsTemperatures.length;
+            BigDecimal result = new BigDecimal(averageTemp, context);
+            averageTemp = result.doubleValue();
+            return averageTemp;
+        }
+        else{
+            System.out.println("getAverageTemp| patientsTemperatures == null");
+            generatePatientsTemperatures();
+            for (float patientsTemperature : patientsTemperatures) {
+                averageTemp += patientsTemperature;
+            }
+            averageTemp = averageTemp/patientsTemperatures.length;
+            BigDecimal result = new BigDecimal(averageTemp, context);
+            averageTemp = result.doubleValue();
+            return averageTemp;
+        }
+    }
+
         //TODO реализовать получение средней температуры из массива
         // если метод уже был вызван ранее, не выполнять подсчет снова, а возращать текущее вычисленное значение
         // если генерация температур не была выполнена, вызвать метод генерации
     }
-
+/*
 
     //нужны температуры, средняя температура и кол-во здоровых
     public static String getReport(float[] temperatureData) {
