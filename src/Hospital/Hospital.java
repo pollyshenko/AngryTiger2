@@ -32,7 +32,6 @@ public class Hospital {
 
     //нужно кол-во пациентов
     public float[] generatePatientsTemperatures() {
-        System.out.println("generatePatientsTemperatures");
         //Класс Random. Метод random()
         //DecimalFormat decimalFormat = new DecimalFormat( "#.#" ); - на выходе строка, что не подходит
         //double scale = Math.pow(10, 1); - не очень корректно округляет в итоге
@@ -58,13 +57,13 @@ public class Hospital {
         int x= a + (int)(Math.random() * ((b - a) + 1));
         System.out.println("Случайное число x: " + x);
          */
-        System.out.println(Arrays.toString(patientsTemperatures));
+        System.out.println("generatePatientsTemperatures| " + Arrays.toString(patientsTemperatures));
         return patientsTemperatures;
     }
 
     //нужна генерация температур
     public int getCountHealthy() {
-        System.out.println("getCountHealthy| ");
+        //System.out.println("getCountHealthy| ");
         if (isCount == false) {
             System.out.println("getCountHealthy| isCount == false");
             //int Healthy = 0;
@@ -79,7 +78,7 @@ public class Hospital {
                 }
                 return countHealthy;
             } else {
-                System.out.println("getCountHealthy| patientsTemperatures != null)");
+                System.out.println("getCountHealthy| patientsTemperatures != null");
                 for (float i : patientsTemperatures) {
                     if (i <= 36.9 && i >= 36.2) {
                         countHealthy++;
@@ -91,7 +90,7 @@ public class Hospital {
                 return countHealthy;
             }
         } else {
-            System.out.println("getCountHealthy| isCount == true");
+            System.out.println("getCountHealthy| isCount == true " + countHealthy);
             return countHealthy;
         }
     }
@@ -99,7 +98,7 @@ public class Hospital {
     //нужна генерация температур
 
  public String getTemperaturesToString() {
-     System.out.println("getTemperaturesToString| ");
+     //System.out.println("getTemperaturesToString| ");
         if(temperaturesToString == null){
             System.out.println("getTemperaturesToString| temperaturesToString == null");
             if (patientsTemperatures == null) {
@@ -110,7 +109,7 @@ public class Hospital {
                         .substring(1, temperaturesToString.length() - 1)
                         .replace(',',' ')
                         .replace('.',',');
-                System.out.println("getTemperaturesToString| 2 " + temperaturesToString);
+                //System.out.println("getTemperaturesToString| 2 " + temperaturesToString);
 
                 return temperaturesToString;
             }
@@ -121,12 +120,12 @@ public class Hospital {
                         .substring(1, temperaturesToString.length() - 1)
                         .replace(',',' ')
                         .replace('.',',');
-                System.out.println("getTemperaturesToString| 2 " + temperaturesToString);
+                //System.out.println("getTemperaturesToString| 2 " + temperaturesToString);
                 return temperaturesToString;
             }
         }
         else{
-            System.out.println("getTemperaturesToString| temperaturesToString == true");
+            System.out.println("getTemperaturesToString| temperaturesToString != null " + temperaturesToString);
             return temperaturesToString;
         }
         //TODO реализовать получение массива температур в виде строки <double>, <double>, <double>
@@ -139,6 +138,7 @@ public class Hospital {
     public double getAverageTemp() {
         MathContext context = new MathContext(4, RoundingMode.HALF_UP);
     if(isAverage){
+        System.out.println("getAverageTemp| != null" + averageTemp);
         return averageTemp;
     }
         else {
@@ -175,6 +175,7 @@ public class Hospital {
     //нужны температуры, средняя температура и кол-во здоровых
     public String getReport(float[] temperatureData) {
         if(report != null){
+            System.out.println("getReport| != null" + report);
             return report;
         }
         else{
@@ -190,7 +191,7 @@ public class Hospital {
             StringBuilder sb = new StringBuilder();
             sb.append("Температуры пациентов: ").append(temperaturesToString).append("\n");
             sb.append("Средняя температура: ").append(averageTemp).append("\n");
-            sb.append("Количество здоровых: ").append(countHealthy).append("\n");
+            sb.append("Количество здоровых: ").append(countHealthy);
             report = sb.toString();
             return report;
         }

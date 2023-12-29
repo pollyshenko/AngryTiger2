@@ -18,6 +18,11 @@ public class Main {
        // double avaregenumber = first.getAverageTemp();
        // double avaregenumber2 = first.getAverageTemp();
         String allreport = first.getReport(primer);
+
+        int patientsCount2 = scan.nextInt();
+        Hospital second = new Hospital(patientsCount2);
+        float[] primer2 = second.generatePatientsTemperatures();
+        String allreport2 = second.getReport(primer2);
         //TODO напишите консольное приложение для работы с классом больница, учитывая, что сгенерированные и вычисленные переменные,
         // нельзя будет менять.
        // System.out.println(first.patientsCount);
@@ -26,5 +31,6 @@ public class Main {
        // System.out.println(arrayTemp +"  -  "+ arrayTemp2);
         //System.out.println("average = " + avaregenumber + " average2 = " + avaregenumber2);
         System.out.println(allreport);
+        System.out.println(allreport2);
     }
 }
