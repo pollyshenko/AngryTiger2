@@ -8,14 +8,16 @@ import java.util.Random;
 
 public class Hospital {
     int patientsCount;
-//    int countHealthy;
+    int countHealthy;
+    boolean isCount;
     float[] patientsTemperatures;
+
     public Hospital(int patientsCount) {
         if (patientsCount <= 0)
             throw new IllegalArgumentException("Число должно быть положительным");
         this.patientsCount = patientsCount;
-        this.patientsTemperatures = generatePatientsTemperatures();
-       // this.countHealthy = getCountHealthy();
+        //this.patientsTemperatures = generatePatientsTemperatures();
+        //this.countHealthy = getCountHealthy();
 
         //Это конструктор
         //TODO создание больницы с указанным кол-вом пациентов
@@ -30,12 +32,13 @@ public class Hospital {
         //double scale = Math.pow(10, 1); - не очень корректно округляет в итоге
         //  patientsTemperatures[i] = (float) (Math.ceil(number * scale) / scale);
 
-        MathContext context = new MathContext(3, RoundingMode.HALF_UP);
+        MathContext context = new MathContext(4, RoundingMode.HALF_UP);
         Random rand = new Random();
-        int a=32;
-        int b=40;
-        float[] patientsTemperatures = new float[patientsCount];
-        for(int i = 0; i<patientsCount; i++){
+        int a = 32;
+        int b = 40;
+        patientsTemperatures = new float[patientsCount];
+        //float[] Temperatures = new float[patientsCount];
+        for (int i = 0; i < patientsCount; i++) {
             float number = a + rand.nextFloat(b - a);
             System.out.println(number);
             BigDecimal result = new BigDecimal(number, context);
@@ -55,16 +58,34 @@ public class Hospital {
 
     //нужна генерация температур
     public int getCountHealthy() {
-        int countHealthy = 0;
-        for(float i:patientsTemperatures){
-            if(i < 36.9 && i > 36.2){
-                countHealthy++;
+        System.out.println("getCountHealthy");
+        if (isCount == false) {
+            int Healthy = 0;
+            isCount = true;
+            if (patientsTemperatures == null) {
+                generatePatientsTemperatures();
+               // int Healthy = 0;
+                for (float i : patientsTemperatures) {
+                    if (i <= 36.9 && i >= 36.2) {
+                        Healthy++;
+                    }
+                }
+                return Healthy;
+            } else {
+               // int Healthy = 0;
+                for (float i : patientsTemperatures) {
+                    if (i <= 36.9 && i >= 36.2) {
+                        Healthy++;
+                    }
+                }
+                //TODO реализовать подсчёт кол-ва здоровых(36,2 < x < 36,9) в сгенерированном массиве температур
+                // если метод уже был вызван ранее, не выполнять подсчет снова, а возвращать текущее вычисленное значение
+                // если генерация температур не была выполнена, вызвать метод генерации
+                return Healthy;
             }
+        } else {
+            return countHealthy;
         }
-        //TODO реализовать подсчёт кол-ва здоровых(36,2 < x < 36,9) в сгенерированном массиве температур
-        // если метод уже был вызван ранее, не выполнять подсчет снова, а возвращать текущее вычисленное значение
-        // если генерация температур не была выполнена, вызвать метод генерации
-       return countHealthy;
     }
 /*
     //нужна генерация температур

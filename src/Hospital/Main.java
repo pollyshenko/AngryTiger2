@@ -14,9 +14,9 @@ public class Main {
         int countHealthy = first.getCountHealthy();
         //TODO напишите консольное приложение для работы с классом больница, учитывая, что сгенерированные и вычисленные переменные,
         // нельзя будет менять.
-        System.out.println(first.patientsCount);
-        System.out.println(Arrays.toString(first.patientsTemperatures));
-        System.out.println(countHealthy);
+       // System.out.println(first.patientsCount);
+       // System.out.println(Arrays.toString(first.patientsTemperatures));
+        System.out.println("число - "+countHealthy);
         ;
     }
 }
