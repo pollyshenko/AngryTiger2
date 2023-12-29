@@ -4,6 +4,7 @@ package Hospital;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.util.Arrays;
 import java.util.Random;
 
 public class Hospital {
@@ -11,6 +12,7 @@ public class Hospital {
     int countHealthy;
     boolean isCount;
     float[] patientsTemperatures;
+    String temperaturesToString;
 
     public Hospital(int patientsCount) {
         if (patientsCount <= 0)
@@ -32,7 +34,7 @@ public class Hospital {
         //double scale = Math.pow(10, 1); - не очень корректно округляет в итоге
         //  patientsTemperatures[i] = (float) (Math.ceil(number * scale) / scale);
 
-        MathContext context = new MathContext(4, RoundingMode.HALF_UP);
+        MathContext context = new MathContext(3, RoundingMode.HALF_UP);
         Random rand = new Random();
         int a = 32;
         int b = 40;
@@ -58,44 +60,78 @@ public class Hospital {
 
     //нужна генерация температур
     public int getCountHealthy() {
-        System.out.println("getCountHealthy");
+        System.out.println("getCountHealthy| ");
         if (isCount == false) {
-            int Healthy = 0;
+            System.out.println("getCountHealthy| isCount == false");
+            //int Healthy = 0;
             isCount = true;
             if (patientsTemperatures == null) {
+                System.out.println("getCountHealthy| patientsTemperatures == null)");
                 generatePatientsTemperatures();
-               // int Healthy = 0;
                 for (float i : patientsTemperatures) {
                     if (i <= 36.9 && i >= 36.2) {
-                        Healthy++;
+                        countHealthy++;
                     }
                 }
-                return Healthy;
+                return countHealthy;
             } else {
-               // int Healthy = 0;
+                System.out.println("getCountHealthy| patientsTemperatures != null)");
                 for (float i : patientsTemperatures) {
                     if (i <= 36.9 && i >= 36.2) {
-                        Healthy++;
+                        countHealthy++;
                     }
                 }
                 //TODO реализовать подсчёт кол-ва здоровых(36,2 < x < 36,9) в сгенерированном массиве температур
                 // если метод уже был вызван ранее, не выполнять подсчет снова, а возвращать текущее вычисленное значение
                 // если генерация температур не была выполнена, вызвать метод генерации
-                return Healthy;
+                return countHealthy;
             }
         } else {
+            System.out.println("getCountHealthy| isCount == true");
             return countHealthy;
         }
     }
-/*
+
     //нужна генерация температур
-    public String getTemperaturesToString() {
+
+ public String getTemperaturesToString() {
+     System.out.println("getTemperaturesToString| ");
+        if(temperaturesToString == null){
+            System.out.println("getTemperaturesToString| temperaturesToString == null");
+            if (patientsTemperatures == null) {
+                System.out.println("getTemperaturesToString| patientsTemperatures == null");
+                generatePatientsTemperatures();
+                temperaturesToString = Arrays.toString(patientsTemperatures);
+                temperaturesToString = temperaturesToString
+                        .substring(1, temperaturesToString.length() - 1)
+                        .replace(',',' ')
+                        .replace('.',',');
+                System.out.println("getTemperaturesToString| 2 " + temperaturesToString);
+
+                return temperaturesToString;
+            }
+            else{
+                System.out.println("getTemperaturesToString| patientsTemperatures == true");
+                temperaturesToString = Arrays.toString(patientsTemperatures);
+                temperaturesToString = temperaturesToString
+                        .substring(1, temperaturesToString.length() - 1)
+                        .replace(',',' ')
+                        .replace('.',',');
+                System.out.println("getTemperaturesToString| 2 " + temperaturesToString);
+                return temperaturesToString;
+            }
+        }
+        else{
+            System.out.println("getTemperaturesToString| temperaturesToString == true");
+            return temperaturesToString;
+        }
         //TODO реализовать получение массива температур в виде строки <double>, <double>, <double>
         // если метод уже был вызван ранее, не выполнять подсчет снова, а возращать текущее вычисленное значение
         // если генерация температур не была выполнена, вызвать метод генерации
     }
-
     //Нужна генерация температур
+    /*
+
     public double getAverageTemp() {
         //TODO реализовать получение средней температуры из массива
         // если метод уже был вызван ранее, не выполнять подсчет снова, а возращать текущее вычисленное значение

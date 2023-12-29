@@ -10,13 +10,17 @@ public class Main {
 
         Hospital first = new Hospital(patientsCount);
         System.out.println("after constructor");
-       // float [] primer = first.generatePatientsTemperatures();
-        int countHealthy = first.getCountHealthy();
+       float [] primer = first.generatePatientsTemperatures();
+        //int countHealthy = first.getCountHealthy();
+       // int count2Healthy = first.getCountHealthy();
+        String arrayTemp = first.getTemperaturesToString();
+        String arrayTemp2 = first.getTemperaturesToString();
         //TODO напишите консольное приложение для работы с классом больница, учитывая, что сгенерированные и вычисленные переменные,
         // нельзя будет менять.
        // System.out.println(first.patientsCount);
        // System.out.println(Arrays.toString(first.patientsTemperatures));
-        System.out.println("число - "+countHealthy);
+       // System.out.println("число - "+countHealthy + " число2 - "+count2Healthy);
+        System.out.println(arrayTemp +"  -  "+ arrayTemp2);
         ;
     }
 }
