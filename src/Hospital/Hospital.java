@@ -15,7 +15,8 @@ public class Hospital {
     String temperaturesToString;
     double averageTemp;
     boolean isAverage;
-    MathContext context = new MathContext(3, RoundingMode.HALF_UP);
+    String report;
+
 
     public Hospital(int patientsCount) {
         if (patientsCount <= 0)
@@ -36,7 +37,7 @@ public class Hospital {
         //DecimalFormat decimalFormat = new DecimalFormat( "#.#" ); - на выходе строка, что не подходит
         //double scale = Math.pow(10, 1); - не очень корректно округляет в итоге
         //  patientsTemperatures[i] = (float) (Math.ceil(number * scale) / scale);
-
+        MathContext context = new MathContext(3, RoundingMode.HALF_UP);
         Random rand = new Random();
         int a = 32;
         int b = 40;
@@ -136,6 +137,7 @@ public class Hospital {
 
 
     public double getAverageTemp() {
+        MathContext context = new MathContext(4, RoundingMode.HALF_UP);
     if(isAverage){
         return averageTemp;
     }
@@ -168,10 +170,31 @@ public class Hospital {
         // если метод уже был вызван ранее, не выполнять подсчет снова, а возращать текущее вычисленное значение
         // если генерация температур не была выполнена, вызвать метод генерации
     }
-/*
+
 
     //нужны температуры, средняя температура и кол-во здоровых
-    public static String getReport(float[] temperatureData) {
+    public String getReport(float[] temperatureData) {
+        if(report != null){
+            return report;
+        }
+        else{
+            if(temperaturesToString == null){
+                getTemperaturesToString();
+            }
+            if(!isAverage){
+                getAverageTemp();
+            }
+            if(!isCount){
+                getCountHealthy();
+            }
+            StringBuilder sb = new StringBuilder();
+            sb.append("Температуры пациентов: ").append(temperaturesToString).append("\n");
+            sb.append("Средняя температура: ").append(averageTemp).append("\n");
+            sb.append("Количество здоровых: ").append(countHealthy).append("\n");
+            report = sb.toString();
+            return report;
+        }
+
         //TODO реализовать получение отчёта в формате приложенном ниже
         // если метод уже был вызван ранее, не выполнять подсчет снова, а возращать текущее вычисленное значение
         // если все необходимые переменные не были получены ранее, вызвать все методы необходимые для получения отчёта
@@ -180,8 +203,8 @@ public class Hospital {
            Средняя температура: 35,67
            Количество здоровых: 1
          */
-    /*
-        return "";
+
+
     }
-    */
+
 }
